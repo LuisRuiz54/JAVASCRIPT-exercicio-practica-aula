@@ -4,53 +4,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie-edge">
-    <title>EXERCICIO JAVASCRIPT</title>
     <script src="script.js"></script>
+    <title>JAVASCRIPT formulario de sorvete Melhorado</title>
 </head>
 <body>
     
     <h1>SORVETERIA TOTI</h1>
    
-    <form>
+    <form action="validation" name="myform">
+        
         <fieldset>
+           <legend>Dados do cliente</legend>
 
-            <h2>Dados do cliente</h2>
-    
-        <input type="text" name="nome" id="nome">Nome<br>
-        <input type="tel" name="telefone" id="telefone">Telefone<br>
-        <input type="email" name="email" id="email" >Email<br>
+        <label for="nome_cliente">Nome do cliente</label>
+        <input type="text" name="nome_cliente" id="nome"/><br>
+       
+        <label for="telefone_cliente">Telefone</label>
+        <input type="tel" name="telefone_cliente" id="telefone"/><br>
+
+        <label for="email_cliente">Email</label>
+        <input type="email" name="email_cliente" id="email"/><br>
         
     </fieldset>     
 
     <fieldset>
 
-        <h2>Escolhe seu sorvete</h2>
-<h3>Sabor</h3>
+        <legend>Escolhe seu sorvete</legend>
+<h2>Sabor</h2>
 
-    <input type="radio" name="sabor" id="coco" value="coco" checked />coco<br>
-    <input type="radio" name="sabor" id="chocolate" value="chocolate"/> Chocolate<br>
+    <input type="radio" name="sabor" id="coco" value="coco" checked />Coco<br>
+    <input type="radio" name="sabor" id="chocolate" value="chocolate"/>Chocolate<br>
     <input type="radio" name="sabor" id="mixto" value="mixto"/>Mixto<br>
     
-<h3>Recipiente </h3>
+<h2>Recipiente </h2>
 
     <input type="radio" name="recipiente" id="copo" value="copo" checked />Copa<br>
-    <input type="radio" name="recipiente" id="casquinha" value="casquinha"/> casquinha<br>
+    <input type="radio" name="recipiente" id="casquinha" value="casquinha"/>Casquinha<br>
 
 
-<h3>Coberturas</h3>
+<h2>Extras</h2>
 
-<input type="checkbox" name="coberturas" id="leitecondensado" value="leitecondensado"/>Leitecondensado<br>
-<input type="checkbox" name="coberturas" id="morango" value="morango"/> Morango<br>
-<input type="checkbox" name="coberturas" id="caramelo"value="caramelo"/>Caramelo<br>
+<input type="checkbox" name="extras[]" id="leitecondensado" value="leitecondensado"/>Leitecondensado<br/>
+<input type="checkbox" name="extras[]" id="morango" value="morango"/>Morango<br/>
+<input type="checkbox" name="extras[]" id="caramelo"value="caramelo"/>Caramelo<br/>
 
 </fieldset> 
 
+<p id="mensagemError"></p>
 
+<button type="button" value="Enviar" id="enviar" onclick="recolherDados()">Enviar</button>
+<button type="reset" value="Borrar" id="borrar">Borrar</button>
 
-<button type="button" onclick="recolherDados()">Enviar</button>
 
  </form>
+ 
 
 </body>
+
 
 </html>

@@ -1,63 +1,109 @@
 function recolherDados() {
-		let nome = document.getElementById("nome").value;
-		let telefone = document.getElementById("telefone").value;
-		let email = document.getElementById("email").value;
+
+let form = document.forms["myform"]
+
+console.log(document.forms);
+
+		let nome = form.nome_cliente.value;
+		let telefone = form.telefone_cliente.value;
+		let email = form.email_cliente.value;
 		
-let sabor = "";
+let sabor = form.sabor.value;
 
-let saborCoco = document.getElementById("coco");
-let saborChocolate = document.getElementById("chocolate");
-let saborMixto = document.getElementById("mixto");
+let recipiente = form.recipiente.value;
 
 
-if(saborCoco.cheked) {
-     sabor = saborCoco.value;
-} else if (saborChocolate.cheked) {
-	sabor = saborChocolate.value;
-} else {
-	sabor = saborMixto.value;
+let extras = document.getElementsByName("extras[]");
+
+
+let mensagemFinal = "O cliente com nome: "+nome+
+					",telefone: "+telefone+
+		     		",email:"+email+
+					",escolheu um sorvete de: "+sabor+
+					",em um recipiente de: "+ recipiente+
+					",com extras de: ";
+
+	    for (let i = 0; i < extras.length; i++) {
+		const element = extras[i];
+
+		if(element.checked){
+			mensagemFinal+= element.value + " ";
+		}
+		    
+	}
+			console.log(mensagemFinal);
 }
 
-let recipiente = "";
+    // Otro codigo de practica para validar 
+		function iniciar(){
+			document.getElementById("enviar").addEventListener('click',validar,false);
+		}
+								
+        function validaNome(){
+         var elemento = document.getElementById("nome");
+         if (!elemento.checkValidity()) {
+			 if (elemento.validity.valueMissing){
+				 error1(elemento,"coloque um nome");
+			 }
+        	//error(elemento);
+	        return false;
+           }
+          return true;
+		}
 
-let recipienteCopo = document.getElementById("copo");
-let recipienteCasquinha = document.getElementById("casquinha");
-
-if(recipienteCopo.cheked){
-	recipiente = recipienteCopo.value;
-} else {
-	recipiente = recipienteCasquinha.value;
-}
-
-let coberturas = [];
-
-let coberturaLeitecondensado = document.getElementById("leitecondensado");
-let coberturaMorango = document.getElementById("morango");
-let coberturaCaramelo = document.getElementById("caramelo");
-
-if(coberturaLeitecondensado.cheked){
-	cobertura.push(coberturaLeitecondensado.value);
-}
-if(coberturaMorango.cheked){
-	cobertura.push(coberturaMorango.value);
-}
-if(coberturaCaramelo.cheked){
-	cobertura.push(coberturaCaramelo.value);
-}
+		
+		function validaTelefone(){
+			var elemento = document.getElementById("telefone");
+			if (!elemento.checkValidity()) {
+				if (elemento.validity.valueMissing){
+					error1(elemento,"coloque um telefone");
+				}
+			   //error(elemento);
+			   return false;
+			  }
+			 return true;
+		   }
 
 
-		let mensagemfinal = " O cliente: "+nome+
-							",telefone: "+telefone+
-							",email:"+email+
-							" escolheu um sorvete de: "+sabor+
-							",em um recipiente de: "+recipiente+
-							",com coberturas de: ";
+		   function validaEmail(){
+			var elemento = document.getElementById("email");
+			if (!elemento.checkValidity()) {
+			   error(elemento);
+			   return false;
+			  }
+			 return true;
+		   }
 
-							for (let i = 0; i < coberturas.length; i++) {
-								const element = coberturas [i];
+		   function validar(e) {
+			   borrarError();
+			   if(validaNome() && validaTelefone() && validaEmail() &&
+			   confirm("Click para enviar seu formulario")) {
+				   return true
+			   } else {
+				   e.preventDefaulf();
+				   return false;
+			   }
+		   }
 
-							mensagemfinal+= element + " ";
-						}
-						console.log(mensagemfinal);
-						
-}
+		   function error(elemento) {
+			   document.getElementById("mensagemError").innerHTML =
+			   elemento.validationMessage;
+			   elemento.className= "error";
+			   elemento.focus();
+		   }
+
+		   function error1(elemento,mensagem) {
+			document.getElementById("mensagemError").innerHTML = mensagem;
+			elemento.className= "error";
+			elemento.focus();
+		}
+
+
+		     function borrarError(){
+			 var formulario = document.forms[0];
+		 	 for (var i=0; i<formulario.elements.length;i++){
+             formulario.element[i].className ="";
+			 }
+		 }
+
+
